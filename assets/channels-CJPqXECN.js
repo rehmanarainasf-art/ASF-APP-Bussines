@@ -1,0 +1,1 @@
+import{i as e}from"./Screens-C6u74ZGt.js";var t=e;export{t as component};
