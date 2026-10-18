@@ -1,0 +1,21 @@
+## ASF architecture
+- Keep the desktop shell and account state shared above leaf routes so navigation preserves the Windows frame and preferences.
+- Use account-scoped Cloud records for saved messenger state and AI threads; route parameters own the active AI conversation.
+- Only verified server handlers create virtual identities or look up another user's profile; browser profile reads remain owner-only.
+- Use AI Elements and the AI SDK Responses stream for ASF AI; provider secrets and denial state stay server-side.
+- Calls are explicitly a preview, and ASF virtual numbers are independent of Meta WhatsApp and carrier phone numbers.
+- Calls use WebRTC peer-to-peer with signalling rows in `call_signals` (RLS: chat partners only); one CallProvider above routes owns call state and overlay.
+- Keep the call context and consumer hook in a separate non-component module so provider Fast Refresh cannot replace the context identity used by mounted consumers.
+- Keep call signalling subscriptions keyed to account identity, not render-time callback identities; reserve and deduplicate incoming offers before asynchronous profile reads to avoid lost answers and false busy responses.
+- Status visibility is decided in the database: chat partners or people who saved the poster's number; status media lives under `<uid>/status/`.
+
+- One shell-level message listener acknowledges delivery from the recipient browser and emits notifications; list reads never mark messages delivered.
+- Status engagement is stored per status/viewer with owner-only named viewer access through a verified database function.
+- Use a breakpoint-based bottom navigation on phones and preserve the desktop shell on laptops.
+- Resolve media URLs against their exact source path and clear account-specific state on identity changes so one account's photo or preferences cannot appear on another account.
+- Initialise profiles with empty editable fields; preserve existing rows and accept empty names on profile saves, so defaults never repopulate cleared profiles.
+- Merge saved preferences with central account defaults and reject stale chat fetch results after identity changes, so previous accounts cannot appear during loading.
+- Preserve terminal call signals after hangup so the recipient can receive end/decline events before local call cleanup resets the view.
+- Archived chats, custom chat lists and saved AI backups live in the account's messenger_state JSON; the backup summary streams from the bearer-verified /api/backup-summary route.
+- Hidden admin console at /x-console; server fns re-check has_role before service-role use; audit log append-only.
+- Reports use caller-scoped inserts with participant RLS; admin keyword search is an explicit review signal, and message blocking requires a reason and append-only audit entries before privileged mutation.

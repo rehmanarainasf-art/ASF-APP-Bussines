@@ -1,0 +1,1 @@
+DO $$ BEGIN RAISE NOTICE 'tables: %', (select string_agg(tablename, ',') from pg_tables where schemaname='public'); END $$;

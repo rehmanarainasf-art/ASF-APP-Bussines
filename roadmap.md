@@ -1,0 +1,43 @@
+# ASF Messenger
+- [ ] Latest request: unread count underneath each chat's time; prevent chat-list flicker during refresh.
+- [x] Chats icon badge counts chats with unread messages (not total messages); installed app badge follows it; app icon/favicon/manifest use the new ASF APP Bussines logo.
+- [x] Calls: remote voice always played through one persistent audio element; callee answers after setting the remote offer; custom TURN via VITE_TURN_*; 30 s connect timeout with a clear error.
+- [x] Calls: "Calling…" when the other person is offline, "Ringing…" when online (presence); caller hears ringback tone; receiver hears own ringtone (chosen from gallery/music in Settings > Notifications).
+- [x] ASF AI call: voice conversation (Urdu / Hindi / English), also startable from Calls > New call.
+- [x] Closed-app push notifications for messages and incoming calls (service worker + Web Push, VAPID); installable app icon via manifest.
+- [x] Current request: remove status avatar ring, lower My status, and cap anchored menu height; mobile menu checked below 340px.
+- [x] Current request: compact admin tables and secure Reports with keyword review and message blocking.
+- [x] Current request: mobile call opened, ended, and saved after refresh; populated admin messages/calls and keyword search checked; signed-out denied and service-role source boundary reviewed.
+- [ ] Reports submission/blocking end-to-end: no disposable reported message supplied; no real user messages deleted for testing. Non-admin authenticated denial awaits an authorised second test session.
+- [ ] Compact reference menu and phone chat header; investigate outgoing call cancellation and review security findings.
+- [x] Khali icon sab DP/profile par, purani sample pics hata di gayin; status "View" list mein likes sab se upar; ticks (1 / 2 / neele 2) aur laptop/mobile layout verified.
+- [x] Latest request: clear only the requesting user's own name, about and photo; preserve ASF ID and all other accounts. Verified after refresh and in an independent signed-out browser.
+- [x] British English everywhere: all screen text, toasts, call messages and ASF AI replies now use British English.
+- [ ] Current request: clean account defaults and account isolation.
+- [ ] Current request: reference chat menus, archived/selection/list tools and locked-chat secret search.
+- [ ] Current request: functional reference settings and voice/video device options.
+- [ ] Current request: closed-app push notifications (requires Firebase web push connection).
+- [ ] Current request: ASF AI gallery attachments with verified model-compatible support.
+- [ ] Current request: verify changed flows in laptop/mobile browser sizes; physical devices unavailable in this environment.
+- [x] Recreate Windows desktop frame and WhatsApp-style navigation, chats and contact details.
+- [x] Accounts, permanent unique 03 numbers and editable business profiles.
+- [x] Account-persisted threaded ASF AI with streaming and dedicated conversation URLs.
+- [x] Status, calls placeholder, channels, communities and business tools.
+- [x] Themes, languages, settings and PIN/privacy controls.
+- [ ] Verify two-account call/delivery/status engagement flows; blocked on a second authorized test account. Source ZIP is deferred until requested again.
+- [x] Google login theek karna
+- [x] Contact save: number + apna diya hua naam
+- [x] Dusre user ki profile dekhna
+- [x] Chats badge: real unread count, hidden at 0; fake dots removed
+- [x] Status "+" opens gallery; photo/video status upload
+- [x] Saved contacts' status visible (even without chat)
+- [x] Real voice/video calls between chat partners
+- [x] "faizan shah" — galti se likha tha; note removed, ASF hi sahi naam hai
+- [x] Empty profile defaults and ASF mobile navigation while preserving laptop layout.
+- [x] Incoming notifications, accurate delivery receipts and saved-contact new-chat picker.
+- [x] Text status shortcut, status likes and owner-visible viewer list.
+- [x] Verify public/UI flows, gallery caption preview and profile isolation regression tests; explain browser/call limitations.
+- [x] Continue remaining work: eliminate inherited sample profile photos across accounts and verify the requested messenger features.
+
+
+- [ ] Login for everyone: own Cloud backend in this project (schema from migrations)

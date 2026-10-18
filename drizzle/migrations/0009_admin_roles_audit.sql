@@ -1,0 +1,12 @@
+CREATE TYPE public.app_role AS ENUM ('admin','user');
+CREATE TABLE public.user_roles (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE, role public.app_role NOT NULL, UNIQUE(user_id, role));
+GRANT SELECT ON public.user_roles TO authenticated;
+GRANT ALL ON public.user_roles TO service_role;
+ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY own_roles_read ON public.user_roles FOR SELECT TO authenticated USING (user_id = auth.uid());
+CREATE OR REPLACE FUNCTION public.has_role(_user_id uuid, _role public.app_role) RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public AS $$ SELECT EXISTS (SELECT 1 FROM public.user_roles WHERE user_id = _user_id AND role = _role) $$;
+CREATE TABLE public.admin_audit (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), admin_id uuid NOT NULL, action text NOT NULL, target_user uuid, ref text, reason text, ok boolean NOT NULL DEFAULT true, created_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT, INSERT ON public.admin_audit TO service_role;
+ALTER TABLE public.admin_audit ENABLE ROW LEVEL SECURITY;
+CREATE OR REPLACE FUNCTION public.admin_audit_append_only() RETURNS trigger LANGUAGE plpgsql SET search_path = public AS $$ BEGIN RAISE EXCEPTION 'Audit log is append-only'; END $$;
+CREATE TRIGGER admin_audit_lock BEFORE UPDATE OR DELETE ON public.admin_audit FOR EACH ROW EXECUTE FUNCTION public.admin_audit_append_only();
